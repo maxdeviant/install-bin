@@ -1,3 +1,13 @@
+#
+# install-bin
+#
+
+lib/
+
+#
+# Node
+#
+
 # Logs
 logs
 *.log

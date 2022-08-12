@@ -1,0 +1,32 @@
+{
+  "name": "install-bin",
+  "version": "0.1.0",
+  "repository": "git@github.com:maxdeviant/install-bin.git",
+  "author": "Marshall Bowers <elliott.codes@gmail.com>",
+  "license": "MIT",
+  "description": "",
+  "keywords": [],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "format": "prettier --ignore-path .gitignore --write '**/*.+(js|json|md|ts|tsx)'",
+    "build": "tsc -p .",
+    "test": "jest"
+  },
+  "files": [
+    "lib/",
+    "!lib/**/__tests__/",
+    "!lib/**/*.test.{js,d.ts}"
+  ],
+  "dependencies": {
+    "axios": "0.27.2",
+    "tar": "6.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "18.7.1",
+    "@types/rimraf": "3.0.2",
+    "@types/tar": "6.1.2",
+    "prettier": "2.7.1",
+    "typescript": "4.7.4"
+  }
+}
