@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { existsSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -10,12 +10,14 @@ export interface MakeInstallerParams {
   root: string;
   binary: Binary;
   logLevel?: LogLevelFilterString;
+  requestConfig?: AxiosRequestConfig;
 }
 
 export const makeInstaller = ({
   root,
   binary,
   logLevel = 'info',
+  requestConfig,
 }: MakeInstallerParams) => {
   const logger = new Logger(logLevel);
 
@@ -40,7 +42,10 @@ export const makeInstaller = ({
     logger.info(`Downloading ${binary.url}`);
 
     try {
-      const res = await axios.get(binary.url, { responseType: 'stream' });
+      const res = await axios.get(binary.url, {
+        ...requestConfig,
+        responseType: 'stream',
+      });
 
       await new Promise((resolve, reject) => {
         res.data
