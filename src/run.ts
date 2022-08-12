@@ -1,9 +1,12 @@
 import { spawnSync } from 'child_process';
 import { makeInstaller, MakeInstallerParams } from './installer';
+import { Logger } from './logger';
 
 const hideBin = (argv: string[]) => argv.slice(2);
 
 export const run = async (params: MakeInstallerParams) => {
+  const logger = new Logger(params.logLevel ?? 'info');
+
   const { install, binaryPath } = makeInstaller(params);
 
   await install();
@@ -13,7 +16,7 @@ export const run = async (params: MakeInstallerParams) => {
     stdio: 'inherit',
   });
   if (result.error) {
-    console.error(result.error);
+    logger.error(result.error);
     return process.exit(1);
   }
 
